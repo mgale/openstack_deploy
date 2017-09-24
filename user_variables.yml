@@ -17,7 +17,7 @@
 debug: True
 
 ## Tempest settings
-tempest_public_subnet_cidr: 172.29.248.0/22
+tempest_public_subnet_cidr: 172.29.250.0/22
 tempest_public_subnet_allocation_pools: "172.29.249.110-172.29.249.200"
 
 ## Galera settings
@@ -28,6 +28,22 @@ galera_wsrep_provider_options:
 
 ## Neutron settings
 neutron_metadata_checksum_fix: True
+
+openstack_host_specific_kernel_modules:
+  - name: "openvswitch"
+    pattern: "CONFIG_OPENVSWITCH="
+    group: "network_hosts"
+
+### Neutron specific config
+neutron_plugin_type: ml2.ovs
+
+neutron_ml2_drivers_type: "flat,vlan"
+neutron_provider_networks:
+  network_flat_networks: "*"
+  network_types: "vlan"
+  network_vlan_ranges: "vlan:102:199"
+  network_mappings: "vlan:br-vlan"
+
 
 ### Set workers for all services to optimise memory usage
 
