@@ -19,7 +19,6 @@ global_overrides:
   # The external IP is quoted simply to ensure that the .aio file can be used as input
   # dynamic inventory testing.
   external_lb_vip_address: "192.168.3.10"
-  tunnel_bridge: "br-vxlan"
   management_bridge: "br-mgmt"
   provider_networks:
     - network:
@@ -33,16 +32,6 @@ global_overrides:
           - hosts
         is_container_address: true
         is_ssh_address: true
-    - network:
-        container_bridge: "br-vxlan"
-        container_type: "veth"
-        container_interface: "eth10"
-        ip_from_q: "tunnel"
-        type: "vxlan"
-        range: "1:1000"
-        net_name: "vxlan"
-        group_binds:
-          - neutron_openvswitch_agent
     - network:
         container_bridge: "br-vlan"
         container_type: "veth"
